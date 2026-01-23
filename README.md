@@ -51,6 +51,27 @@ games.get_json()
 games.get_dict()
 ```
 
+## MCP Server (Model Context Protocol)
+
+Use the NBA API with Claude AI through the MCP server:
+
+```bash
+# Install MCP dependencies
+pip install mcp>=1.0.0
+
+# Run the MCP server
+python mcp_server/server.py
+```
+
+The MCP server provides 12 tools for accessing NBA data through Claude:
+- Player search and statistics
+- Team information and rosters
+- Live game scores
+- League leaders
+- And more!
+
+See [mcp_server/README.md](mcp_server/README.md) for complete setup and usage instructions.
+
 ## Additional Examples
 
 - [Requests/Response Options](https://github.com/swar/nba_api/blob/master/docs/nba_api/stats/examples.md#endpoint-usage-example)
