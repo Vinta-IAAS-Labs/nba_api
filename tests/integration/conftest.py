@@ -10,6 +10,25 @@ import time
 import pytest
 
 
+def _query_without_game_date(request):
+    """Return query params excluding GameDate so date-based cassettes remain stable."""
+    query = getattr(request, "query", None) or []
+    return [(key, value) for key, value in query if key.lower() != "gamedate"]
+
+
+def _query_matcher_ignoring_game_date(r1, r2):
+    """VCR matcher that compares query params except for GameDate."""
+    q1 = _query_without_game_date(r1)
+    q2 = _query_without_game_date(r2)
+    if q1 != q2:
+        raise AssertionError(f"{q1} != {q2}")
+
+
+def pytest_recording_configure(config, vcr):
+    """Override VCR's query matcher to ignore dynamic GameDate query params."""
+    vcr.register_matcher("query", _query_matcher_ignoring_game_date)
+
+
 @pytest.fixture(autouse=True)
 def rate_limit(request):
     """Sleep between requests for live tests to avoid NBA Stats API throttling.
