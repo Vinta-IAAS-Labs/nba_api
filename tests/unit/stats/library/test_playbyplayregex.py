@@ -1,5 +1,4 @@
 import pytest
-from data_playbyplayregex import playbyplay
 
 from nba_api.stats.library.playbyplayregex import (
     re_block,
@@ -21,6 +20,8 @@ from nba_api.stats.library.playbyplayregex import (
     re_violation,
     re_violation_team,
 )
+
+from .data_playbyplayregex import playbyplay
 
 
 # BLOCK
